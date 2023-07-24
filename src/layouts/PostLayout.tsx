@@ -70,10 +70,10 @@ export default function PostLayout({
               </div>
             </div>
           </header>
-          <div className="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:grid-rows-[1fr_auto] xl:gap-x-6 xl:divide-y-0">
-            <div>
-              <div className="xl:sticky xl:top-6 xl:max-h-[calc(100vh_-_3rem)] xl:overflow-y-auto">
-                <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
+          <div className="flex flex-col divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
+            <div className="contents xl:block">
+              <div className="contents xl:sticky xl:top-6 xl:flex xl:max-h-[calc(100vh_-_3rem)] xl:flex-col xl:overflow-hidden">
+                <dl className="shrink-0 pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
                   <dt className="sr-only">Authors</dt>
                   <dd>
                     <ul className="flex justify-center space-x-8 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
@@ -97,67 +97,71 @@ export default function PostLayout({
                     </ul>
                   </dd>
                 </dl>
-                <h2 className="pt-6 text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                  目录
-                </h2>
-                <TOCInline asDisclosure={false} toc={toc} />
+                <div className="contents xl:block xl:min-h-0 xl:overflow-y-auto">
+                  <div>
+                    <h2 className="pt-6 text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      目录
+                    </h2>
+                    <TOCInline asDisclosure={false} collapseSubheadings toc={toc} />
+                  </div>
+                  <footer className="order-last">
+                    <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:divide-y">
+                      {tags && (
+                        <div className="py-4 xl:py-8">
+                          <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                            标签
+                          </h2>
+                          <div className="mt-3 flex flex-wrap">
+                            {tags.map((tag) => (
+                              <Tag key={tag} text={tag} />
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {(next || prev) && (
+                        <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
+                          {prev && (
+                            <div>
+                              <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                                上一篇 文章
+                              </h2>
+                              <div className="mt-3 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                                <Link href={`/blog/${prev.slug}`}>{prev.title}</Link>
+                              </div>
+                            </div>
+                          )}
+                          {next && (
+                            <div>
+                              <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                                下一篇 文章
+                              </h2>
+                              <div className="mt-3 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                                <Link href={`/blog/${next.slug}`}>{next.title}</Link>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    <div className="pt-4 xl:pt-8">
+                      <Link
+                        href="/blog"
+                        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                      >
+                        &larr; 返回博客列表
+                      </Link>
+                    </div>
+                  </footer>
+                </div>
               </div>
             </div>
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+            <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:pb-0">
               <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">{children}</div>
               <div className="pt-6 pb-6 text-center text-sm text-gray-700 dark:text-gray-300">
                 <Link href={editUrl(fileName)}>{'前往GitHub浏览'}</Link>
               </div>
               <Comments frontMatter={frontMatter} />
             </div>
-            <footer className="xl:col-start-1 xl:row-start-2">
-              <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:divide-y">
-                {tags && (
-                  <div className="py-4 xl:py-8">
-                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                      标签
-                    </h2>
-                    <div className="mt-3 flex flex-wrap">
-                      {tags.map((tag) => (
-                        <Tag key={tag} text={tag} />
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {(next || prev) && (
-                  <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                    {prev && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          上一篇 文章
-                        </h2>
-                        <div className="mt-3 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/blog/${prev.slug}`}>{prev.title}</Link>
-                        </div>
-                      </div>
-                    )}
-                    {next && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          下一篇 文章
-                        </h2>
-                        <div className="mt-3 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/blog/${next.slug}`}>{next.title}</Link>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-              <div className="pt-4 xl:pt-8">
-                <Link
-                  href="/blog"
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                >
-                  &larr; 返回博客列表
-                </Link>
-              </div>
-            </footer>
           </div>
         </div>
       </article>

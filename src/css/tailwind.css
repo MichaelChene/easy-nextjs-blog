@@ -31,3 +31,26 @@ input:-webkit-autofill:focus {
 iframe {
   width: 100%;
 }
+
+.toc-branch > summary::-webkit-details-marker {
+  display: none;
+}
+
+.toc-chevron {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 180ms ease;
+}
+
+.toc-branch[open] > summary .toc-chevron {
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc-chevron {
+    transition: none;
+  }
+}
