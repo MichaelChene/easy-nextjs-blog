@@ -2,7 +2,7 @@
 title: '重学 React 状态管理 - Jotai 篇'
 date: '2023/07/16'
 lastmod: '2023/07/16'
-tags: [react, jotai, state management]
+tags: [react, jotai, 状态管理]
 draft: false
 summary: '从派生 atom 里的两次 get 看 Jotai 怎么记录依赖，再用购物车说明基础数据、派生值和写操作怎么组织。'
 images: ['/static/images/16350881224248.jpg']

@@ -2,7 +2,7 @@
 title: '重学 React 状态管理 - Redux 篇'
 date: '2023/07/22'
 lastmod: '2023/07/22'
-tags: [react, redux, redux toolkit, state management]
+tags: [react, redux, redux toolkit, 状态管理]
 draft: false
 summary: '顺着一次 dispatch 看 Redux 怎么保存状态、通知订阅者，再用 Redux Toolkit 写同样的双计数器，看看哪些配置可以交给工具处理。'
 images: ['/static/images/16350881224248.jpg']

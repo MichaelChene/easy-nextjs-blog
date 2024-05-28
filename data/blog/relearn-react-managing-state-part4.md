@@ -2,7 +2,7 @@
 title: '重学 React 状态管理 - Zustand 篇'
 date: '2023/07/24'
 lastmod: '2023/07/24'
-tags: [react, zustand, state management]
+tags: [react, zustand, 状态管理]
 draft: false
 summary: '用两个计数器拆开 Zustand 的 store 和 React Hook，看看 set 怎么通知订阅者，以及 selector 返回什么值会影响组件更新。'
 images: ['/static/images/16350881224248.jpg']
